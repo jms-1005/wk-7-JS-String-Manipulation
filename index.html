@@ -102,16 +102,45 @@
         // S - isVowel('S') -> false, do not increment
 
         //counter will be 2
-        let counter = 0;
+        
+        let vowelCounter = {
+            a: 0,
+            e: 0,
+            i: 0,
+            o: 0,
+            u: 0,
+            total: 0
+        }
+
+    
+        
 
         for(let i=0; i<string.length; i++){
             // console.log('at position', i, string.charAt(i));
-            if( isVowel(string.charAt(i))){
+            let character = string.charAt(i).toLowerCase();
+            if( isVowel(character)){
                 // console.log('charater', string.charAt(i), isVowel(string.charAt(i)));
-                counter++;
+                if(character == 'a'){
+                    vowelCounter.a++;
+                    aCounter++;
+                }
+                if(character == 'e'){
+                    vowelCounter.e++;
+                }
+                if(character == 'i'){
+                    vowelCounter.i++;
+                }
+                if(character == 'o'){
+                    vowelCounter.o++;
+                }
+                if(character == 'u'){
+                    vowelCounter.u++;
+                }
+                
+                vowelCounter.total++;
             }
         }
-        return counter;
+        return vowelCounter;
     }
 
     function findNoOfAnds(string, countWord){
@@ -133,6 +162,20 @@
         return string.toLowerCase().split(countWord.toLowerCase()).length - 1;
     }
 
+    function isValidEmail(email){
+        //it will do something...
+
+        //return true/false
+
+        // 1. '@' - should contain only 1 @
+        // 2.   a@a.co - To left of @, there should be at least 1 character (email)
+        // 3.to the right of @ - it should contain at least 1 character and at least 1 period (mail provider)
+        // 4. After the period, there should be at least 1 character (domain)
+        // email(1 character before @)
+        // mail provider (1 character after @)
+        // domain (1 character after period)
+    }
+
 
     $(document).ready(function(){
 
@@ -140,8 +183,14 @@
             let userInput = $('#userInput').val();
             // console.log(countVowels(userInput));
             let vowelCount = countVowels(userInput);
-
-            $('.output').html("The vowel count is " + vowelCount);
+            console.log(vowelCount);
+            $('.output').html(`<p>The vowel count is ${vowelCount.a + vowelCount.e + vowelCount.i + vowelCount.o + vowelCount.u}
+                <p>A's: ${ vowelCount.a }</p>
+                <p>E's: ${ vowelCount.e }</p>
+                <p>I's: ${ vowelCount.i }</p>
+                <p>O's: ${ vowelCount.o }</p>
+                <p>U's: ${ vowelCount.u }</p>
+                </p>`);
         })
 
     });
