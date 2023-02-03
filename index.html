@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Manipulation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="mb-3">
+            <label for="userinput" class="form-label">Vowel Counter</label>
+            <textarea class="form-control" id="userInput" rows="3" placeholder="Type in or paste some text..."></textarea>
+        </div>
+
+        <button class="btn btn-primary" id="btnVowelCounter">Count Vowels</button>
+
+        <div class="output mt-3"></div>
+
+    </div>
+
+    
+</body>
+<script>
+
+
+    let myString = "Brad Pitt";
+
+    //1. Length of a string
+    console.log("String Length:", myString.length);
+
+    //2. Index of String characters. Index starts from 0 just like arrays
+    console.log("Index of y in:", myString, "is",  myString.indexOf('y')); 
+
+    //3. Character at a particular index
+    console.log("Character at index 10 in", myString, "is", myString.charAt(10));
+
+    // Why is exception handling important?
+    function takeCharGiveIndex(character){
+        if(myString.indexOf(character) != -1){
+            alert(myString.indexOf(character));
+        }
+        else{
+            alert('Sorry the character you gave does not exist in this string!');
+        }
+    }
+
+    // 4. Replace first instance of the character in a string
+    console.log("When I replace t with l - ", myString.replace('t', 'l'));
+
+    // 5. Replace all characters in a string
+    console.log("Replace all t's with l", myString.replaceAll('t', 'l'));
+
+    // 6. Split a string by providing a character
+    console.log("Split string at a", myString.split('a'));
+
+    // 7. Make uppercase
+    console.log('Uppercase:', myString.toUpperCase());
+
+    //8. Make lowercase
+    console.log('Lowercase', myString.toLowerCase());
+
+    //9. Trimming a string
+    myString = "    Brad Pitt           ";
+    console.log(myString, "has character count:", myString.length);
+    console.log('Trimmed string is', myString.trim(), "After trimming the char count is", myString.trim().length);
+
+    //Create function to validate whether a given character is a vowel or not
+
+    function isVowel(character){
+        let vowels = "aeiou";
+        //let userInput = prompt("Enter a character");
+        if(vowels.indexOf(character.toLowerCase()) == -1){
+            // alert('Not a vowel');
+            return false;
+        }
+        else{
+            // alert('Yes. Its is a vowel');
+            return true;
+        }
+        //return true if vowel or false if not
+    }
+
+   // Create a function to count the vowels in a string
+
+   function countVowels(string){
+        // using length we can find the length of string
+        // use for loop to check each character of the string
+        // indexof a vowel string
+        // take a counter and increment it every time we find a vowel
+
+        // VANARTS - V isVowel('V') -> false, do not increment the counter
+        // A - isVowel('A') -> true, incrememt the counter - counter++ -> 1
+        // N - isVowel('N') -> false, no increment
+        // A - isVowel('A') -> true, increment counter - counter++ -> 2
+        // N - isVowel('N') -> false, do not increment
+        // S - isVowel('S') -> false, do not increment
+
+        //counter will be 2
+        let counter = 0;
+
+        for(let i=0; i<string.length; i++){
+            // console.log('at position', i, string.charAt(i));
+            if( isVowel(string.charAt(i))){
+                // console.log('charater', string.charAt(i), isVowel(string.charAt(i)));
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    function findNoOfAnds(string, countWord){
+        //let andCounter = 0;
+        // write code here to count the no of 'and' 
+        // let stringArray = string.split(' ');
+        // for(let i=0; i<stringArray.length; i++){
+        //     console.log(stringArray[i]);
+        //     if(stringArray[i].toLowerCase() == 'and'){
+        //         andCounter++;
+        //     }
+        // }
+
+        //let stringAndArray = string.split('and');
+        //console.log(stringAndArray);
+
+        // let andCounter = string.split('and').length - 1;
+
+        return string.toLowerCase().split(countWord.toLowerCase()).length - 1;
+    }
+
+
+    $(document).ready(function(){
+
+        $('#btnVowelCounter').click(function(){
+            let userInput = $('#userInput').val();
+            // console.log(countVowels(userInput));
+            let vowelCount = countVowels(userInput);
+
+            $('.output').html("The vowel count is " + vowelCount);
+        })
+
+    });
+
+</script>
+</html>
